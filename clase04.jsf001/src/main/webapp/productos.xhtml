@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Productos</title>
+    </h:head>
+    <h:body>
+        <h1>Listado de Productos</h1>
+
+        <h:form>
+            <h:messages id="mensajes" 
+                        showDetail="true"
+                        showSummary="true"/>
+
+            <h:dataTable id="dataTable"
+                         value="#{productoManagedBean.productoList}"
+                         var="producto">
+
+                <h:column>
+                    <f:facet name="header">Producto Id</f:facet>
+                        #{producto.productoId}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Código</f:facet>
+                        #{producto.codigo}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Descripción</f:facet>
+                        #{producto.descripcion}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Precio Base</f:facet>
+
+                    <h:outputText value="#{producto.precioBase}">
+                        <f:convertNumber pattern="'GTQ' #,#00.00"/>
+                    </h:outputText>
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Opciones</f:facet>
+
+                    <h:commandLink value="Agregar" 
+                                   actionListener="#{productoManagedBean.agregarProducto(producto)}">
+                        <f:ajax execute="@this" render="mensajes" />
+                    </h:commandLink>
+                </h:column>
+
+            </h:dataTable>
+
+        </h:form>   
+    </h:body>
+</html>
+
