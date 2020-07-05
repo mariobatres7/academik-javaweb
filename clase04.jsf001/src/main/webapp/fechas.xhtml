@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Manejo de Fechas</title>
+    </h:head>
+    <h:body>
+        
+        #{msg['texto.titulo']}
+        
+        <h1>Manejo de Fechas</h1>
+
+        <h:form id="form">
+            
+            <p:growl id="growl" showSummary="true" showDetail="true"/>
+            
+
+            Fecha con java.util.Date:  
+            <h:outputText value="#{dateManagedBean.date}">
+                <f:convertDateTime pattern="dd/MM/yyyy"  />
+            </h:outputText>
+
+            <br/>
+            
+            Fecha con java.time.LocalDate:  
+            <h:outputText value="#{dateManagedBean.localDateWithFormat}" />
+            
+            
+            <br/>
+            
+            
+            <p:panelGrid columns="2" >
+                
+                <p:outputLabel for="numeroInputNumber">Número:</p:outputLabel>
+                        
+                <p:inputNumber id="numeroInputNumber"
+                               value="#{dateManagedBean.numero}"
+                               required="true"
+                               requiredMessage="Es obligatorio"
+                               />
+                
+                <p:outputLabel for="fechaCalendar"  >#{msg['etiqueta.fecha1']}: </p:outputLabel>
+                
+                <p:calendar id="fechaCalendar" 
+                            value="#{dateManagedBean.localDate}"
+                            >
+                    <p:ajax event="dateSelect" process="@this" update="@form" />
+                </p:calendar>
+            </p:panelGrid>
+            
+            <h1>
+                Número es:   <h:outputText value="#{dateManagedBean.numero}"/>
+            </h1>
+            
+            <p:commandButton id="commandButton"
+                             value="Aceptar"
+                             process="@form"
+                             update="@form"
+                             />
+          
+        </h:form>   
+    </h:body>
+</html>
+
