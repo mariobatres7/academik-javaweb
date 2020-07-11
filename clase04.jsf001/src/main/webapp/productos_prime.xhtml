@@ -11,22 +11,47 @@
         <h1>Listado de Productos</h1>
 
         <h:form id="formulario">
-            
+
+            <p:panel header="tipoProductoPanel">
+                
+                <p:outputLabel for="tipoProductoSelect"
+                               value="Tipo Producto: "/>
+                
+                
+                <p:selectOneMenu id="tipoProductoSelect" 
+                                 value="#{productoManagedBean.tipoProductoSelected}"
+                                 converter="#{productoManagedBean}">
+                                 
+                                <f:selectItems value="#{productoManagedBean.tipoProductoList}" 
+                                                 var="tipoProducto"
+                                                 itemLabel="#{tipoProducto.descripcion}"
+                                                 itemValue="#{tipoProducto}"
+                                                 />
+                </p:selectOneMenu>
+
+                
+                <p:commandButton id="tipoProductoButton" 
+                                 value="Aceptar"
+                                 actionListener="#{productoManagedBean.procesarTipoProducto()}"
+                                 process=":formulario:tipoProductoSelect @this"
+                                 update=":formulario:growl"/>
+            </p:panel>
+
             <p:growl id="growl" showSummary="true" showDetail="true"/>
-            
-            
+
+
             <p:dataTable id="dataTable"
                          value="#{productoManagedBean.productoList}"
                          var="producto">
 
                 <p:column headerText="Producto" sortBy="#{producto.productoId}">
-                        #{producto.productoId}
+                    #{producto.productoId}
                 </p:column>
                 <p:column headerText="Código">
-                        #{producto.codigo}
+                    #{producto.codigo}
                 </p:column>
                 <p:column headerText="Descripción">
-                        #{producto.descripcion}
+                    #{producto.descripcion}
                 </p:column>
                 <p:column headerText="Precio Base">
                     <h:outputText value="#{producto.precioBase}">

@@ -5,7 +5,10 @@ import java.math.BigDecimal;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.Data;
@@ -36,6 +39,15 @@ public class Producto implements Serializable {
     @Column(name = "precio_base")
     private BigDecimal precioBase;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    //Esto se utiliza si se mapean en dos atributos el mismo campo
+    //@JoinColumn(name = "tipo_producto", referencedColumnName = "id", insertable = false, updatable = false)
+
+    @JoinColumn(name = "tipo_producto", referencedColumnName = "id", insertable = false, updatable = false)
+    private TipoProducto tipoProducto;
+
+    //@Column(name = "tipo_producto")
+    //private Integer tipoProductoId;
     @OneToMany(mappedBy = "producto")
     private List<Inventario> inventarioList;
 }
