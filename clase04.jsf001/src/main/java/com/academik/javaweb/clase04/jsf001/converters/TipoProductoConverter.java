@@ -15,12 +15,12 @@ import javax.faces.convert.FacesConverter;
 //@FacesConverter
 public class TipoProductoConverter /*implements Converter*/{
 
-    @Override
+//    @Override
     public Object getAsObject(FacesContext fc, UIComponent uic, String string) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
+ //   @Override
     public String getAsString(FacesContext fc, UIComponent uic, Object t) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

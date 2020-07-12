@@ -3,6 +3,8 @@ package com.academik.javaweb.clase04.jsf001.domain;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
+import javax.json.bind.annotation.JsonbProperty;
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -28,6 +30,7 @@ public class Producto implements Serializable {
 
     @Id
     @Column(name = "producto_id")
+    @JsonbProperty("producto_id") //analogía con Jackson es @JsonProperty
     private Long productoId;
 
     @Column(name = "producto")
@@ -39,6 +42,7 @@ public class Producto implements Serializable {
     @Column(name = "precio_base")
     private BigDecimal precioBase;
 
+    @JsonbTransient
     @ManyToOne(fetch = FetchType.LAZY)
     //Esto se utiliza si se mapean en dos atributos el mismo campo
     //@JoinColumn(name = "tipo_producto", referencedColumnName = "id", insertable = false, updatable = false)
@@ -46,6 +50,8 @@ public class Producto implements Serializable {
     @JoinColumn(name = "tipo_producto", referencedColumnName = "id", insertable = false, updatable = false)
     private TipoProducto tipoProducto;
 
+    
+    @JsonbTransient // analogía en Jackson es @JsonIgnore
     //@Column(name = "tipo_producto")
     //private Integer tipoProductoId;
     @OneToMany(mappedBy = "producto")
