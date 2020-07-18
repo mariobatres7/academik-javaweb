@@ -9,7 +9,7 @@ import java.math.RoundingMode;
  */
 @IVA(pais = IVA.Pais.SV)
 public class SVIVACalculo  implements IVACalculo {
-
+    
     @Override
     public BigDecimal desglozarIVA(BigDecimal cantidad) {
         return cantidad.divide(BigDecimal.valueOf(1.13), 2, RoundingMode.HALF_DOWN);
