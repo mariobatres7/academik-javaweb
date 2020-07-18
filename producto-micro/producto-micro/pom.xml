@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>edu.academik</groupId>
+    <artifactId>producto-micro</artifactId>
+    <version>1.0.0</version>
+    <packaging>war</packaging>
+
+    <name>producto-micro</name>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>11</java.version>
+        <version.wildfly>19.1.0.Final</version.wildfly>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <failOnMissingWebXml>false</failOnMissingWebXml>
+    </properties>
+    
+    <dependencies>
+        
+         
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>5.3.6.Final</version>
+            <scope>provided</scope>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.2.8</version>
+            <scope>compile</scope>
+        </dependency>
+
+        
+        
+        <dependency>
+            <groupId>org.eclipse.microprofile</groupId>
+            <artifactId>microprofile</artifactId>
+            <version>3.3</version>
+            <scope>provided</scope>
+            <type>pom</type>
+        </dependency>
+    </dependencies>
+
+
+    <build>
+        <finalName>producto-micro</finalName>
+    </build>
+    
+    <profiles>
+        <profile>
+            <id>wildfly</id>
+            
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            
+            <build>
+                <plugins>
+                                         
+                    <plugin>
+                        <groupId>org.wildfly.plugins</groupId>
+                        <artifactId>wildfly-jar-maven-plugin</artifactId>
+                        <version>1.0.0.Alpha4</version>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>package</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <feature-pack-location>wildfly@maven(org.jboss.universe:community-universe)#${version.wildfly}</feature-pack-location>
+                            <layers>
+                                <layer>jaxrs</layer>
+                                <layer>microprofile-config</layer>
+                                <layer>microprofile-fault-tolerance</layer>
+                                <layer>microprofile-health</layer>
+                                <layer>microprofile-jwt</layer>
+                                <layer>microprofile-metrics</layer>
+                                <layer>microprofile-openapi</layer>
+                                <layer>open-tracing</layer>
+                                <layer>datasources</layer>
+                                <layer>jpa</layer>
+                            </layers>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+            
+            <dependencies>
+                <dependency>
+                    <groupId>org.jboss.spec.javax.ws.rs</groupId>
+                    <artifactId>jboss-jaxrs-api_2.0_spec</artifactId>
+                    <version>1.0.1.Final</version>
+                    <scope>provided</scope>
+                </dependency>
+            </dependencies>
+            
+            <repositories>
+                
+                <repository>
+                    <id>jboss-public-repository</id>
+                    <name>JBoss Public Maven Repository Group</name>
+                    <url>https://repository.jboss.org/nexus/content/groups/public/</url>
+                </repository>
+                
+                <repository>
+                    <id>Red Hat GA</id>
+                    <name>Red Hat GA</name>
+                    <url>https://maven.repository.redhat.com/ga/</url>
+                </repository>
+                
+            </repositories>
+            
+        </profile>
+    </profiles>
+    
+</project>
