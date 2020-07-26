@@ -1,0 +1,172 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://edu.academik.javaxws/clientes" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="ClienteWebService" targetNamespace="http://edu.academik.javaxws/clientes">
+  <wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://edu.academik.javaxws/clientes" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://edu.academik.javaxws/clientes">
+  <xs:element name="buscarClientePorFecha" type="tns:buscarClientePorFecha"/>
+  <xs:element name="buscarClientePorFechaResponse" type="tns:buscarClientePorFechaResponse"/>
+  <xs:element name="buscarClientePorId" type="tns:buscarClientePorId"/>
+  <xs:element name="buscarClientePorIdResponse" type="tns:buscarClientePorIdResponse"/>
+  <xs:element name="buscarClientes" type="tns:buscarClientes"/>
+  <xs:element name="buscarClientesResponse" type="tns:buscarClientesResponse"/>
+  <xs:element name="crearCliente" type="tns:crearCliente"/>
+  <xs:element name="crearClienteResponse" type="tns:crearClienteResponse"/>
+  <xs:complexType name="crearCliente">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="clienteRequest" type="tns:clienteRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="clienteRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="nombre" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="crearClienteResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="clienteResponse" type="tns:clienteResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="clienteResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="clienteId" type="xs:long"/>
+      <xs:element minOccurs="0" name="codigo" type="xs:string"/>
+      <xs:element minOccurs="0" name="creadoEl" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="nombre" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="buscarClientePorFecha">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="date" type="xs:dateTime"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="buscarClientePorFechaResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="clienteResponse" type="tns:clienteResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="buscarClientes">
+    <xs:sequence/>
+  </xs:complexType>
+  <xs:complexType name="buscarClientesResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="clienteResponseList" type="tns:clienteResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="buscarClientePorId">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="clienteId" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="buscarClientePorIdResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="clienteResponse" type="tns:clienteResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="password" nillable="true" type="xs:string"/>
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="crearCliente">
+    <wsdl:part element="tns:crearCliente" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="buscarClientePorFecha">
+    <wsdl:part element="tns:buscarClientePorFecha" name="parameters">
+    </wsdl:part>
+    <wsdl:part element="tns:password" name="password">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="buscarClientesResponse">
+    <wsdl:part element="tns:buscarClientesResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="buscarClientes">
+    <wsdl:part element="tns:buscarClientes" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="buscarClientePorId">
+    <wsdl:part element="tns:buscarClientePorId" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="buscarClientePorIdResponse">
+    <wsdl:part element="tns:buscarClientePorIdResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="buscarClientePorFechaResponse">
+    <wsdl:part element="tns:buscarClientePorFechaResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="crearClienteResponse">
+    <wsdl:part element="tns:crearClienteResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="Clientes">
+    <wsdl:operation name="crearCliente">
+      <wsdl:input message="tns:crearCliente" name="crearCliente">
+    </wsdl:input>
+      <wsdl:output message="tns:crearClienteResponse" name="crearClienteResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="buscarClientePorFecha">
+      <wsdl:input message="tns:buscarClientePorFecha" name="buscarClientePorFecha">
+    </wsdl:input>
+      <wsdl:output message="tns:buscarClientePorFechaResponse" name="buscarClientePorFechaResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="buscarClientes">
+      <wsdl:input message="tns:buscarClientes" name="buscarClientes">
+    </wsdl:input>
+      <wsdl:output message="tns:buscarClientesResponse" name="buscarClientesResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="buscarClientePorId">
+      <wsdl:input message="tns:buscarClientePorId" name="buscarClientePorId">
+    </wsdl:input>
+      <wsdl:output message="tns:buscarClientePorIdResponse" name="buscarClientePorIdResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ClienteWebServiceSoapBinding" type="tns:Clientes">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="crearCliente">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="crearCliente">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="crearClienteResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="buscarClientePorFecha">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="buscarClientePorFecha">
+        <soap:header message="tns:buscarClientePorFecha" part="password" use="literal">
+        </soap:header>
+        <soap:body parts="parameters" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="buscarClientePorFechaResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="buscarClientes">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="buscarClientes">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="buscarClientesResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="buscarClientePorId">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="buscarClientePorId">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="buscarClientePorIdResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ClienteWebService">
+    <wsdl:port binding="tns:ClienteWebServiceSoapBinding" name="ClientesPort">
+      <soap:address location="http://localhost:8080/jaxws-service-1.0.0/ClienteWebService/Clientes"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

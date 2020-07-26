@@ -64,15 +64,7 @@ public class ProductoEndpoint {
     @Produces(MediaType.APPLICATION_JSON)
     public Response findProductoById(@PathParam("productoId") Long productoId) {
         
-        System.out.println("Buscando producto con productoId:  " + productoId);
-
-        //Dictionary en C#
-        Map<String, Object> map = new HashMap<>();
-        
-        map.put("productoReciboId", productoId);
-        map.put("fecha", LocalDateTime.now()); // Java Time API, en Jackson poner atención al utilizan este API
-
-        return Response.ok(map).build();
+        return Response.ok(this.productoServicio.findProducto(productoId)).build();
     }
     
     @GET

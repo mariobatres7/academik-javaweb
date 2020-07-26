@@ -30,7 +30,6 @@ public class Producto implements Serializable {
 
     @Id
     @Column(name = "producto_id")
-    @JsonbProperty("producto_id") //analogía con Jackson es @JsonProperty
     private Long productoId;
 
     @Column(name = "producto")

@@ -42,4 +42,8 @@ public class ProductoServicio {
         return this.entityManager.createQuery(query).getResultList();
 
     }
+    
+    public Producto findProducto(Long id){
+        return this.entityManager.find(Producto.class, id);
+    }
 }
