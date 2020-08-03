@@ -11,3 +11,6 @@ PrimerServlet/target
 /JAX-WS/jaxws-service/target/
 /producto-micro/jaxrs-client/target/
 /producto-micro/Banguat-Client/target/
+/cors101/target/
+/websocket101/target/
+/websocket101-client/target/

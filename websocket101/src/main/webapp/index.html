@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Start Page</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+        <script type="text/javascript">
+
+            $(document).ready(function () {
+
+                var socket = new WebSocket("ws://192.168.56.1:8080/websocket/socket");
+
+                socket.onmessage = function (e) {
+                    console.log(e.data);
+                    
+                    var html = $("#mensajesDiv").html();
+                    
+                    html = html + "<p>" + e.data + "</p>";
+                    
+                    $("#mensajesDiv").html(html);
+                };
+                
+                $("#enviarButton").click( function (e) {
+                    e.preventDefault();
+                    
+                    var mensaje = $("#inputText").val();
+                    
+                    console.log(mensaje);
+                    
+                    socket.send(mensaje);
+                });
+            });
+
+        </script>
+    </head>
+    <body>
+        <h1>Sockets</h1>
+        
+        <input type="text" id="inputText" />
+        
+        <button id="enviarButton">Enviar</button>
+        
+        
+        <div id="mensajesDiv" style="width: 100%; border: 2px solid blue;">
+            
+        </div>
+    </body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Start Page</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+
+        <script type="text/javascript">
+
+            $(document).ready(function () {
+
+                $("#obtenerClienteButton").click(function (ev) {
+                    ev.preventDefault();
+
+
+                    $.ajax("http://localhost:8080/cors101/v2/clientes", {
+                        type: "GET",
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        success : function(cliente) {
+                            $("#clienteIdSpan").html(cliente.clienteId);
+                            $("#codigoSpan").html(cliente.codigo);
+                            $("#nombreSpan").html(cliente.nombre);
+                            
+                            alert("Información obtenida.");
+                        },
+                        error : function(e){
+                            console.log("error:  " +  e);
+                            alert("Error:  " +  e);
+                        }
+                    });
+                });
+
+
+            });
+        </script>
+    </head>
+    <body>
+        <h1>Búsqueda de clientes</h1>
+
+        <div>
+            <p>
+                <label>Id:</label>
+                <span id="clienteIdSpan"></span>
+            </p>
+
+            <p>
+                <label>Código:</label>
+                <span id="codigoSpan"></span>
+            </p>
+
+
+            <p>
+                <label>Nombre:</label>
+                <span id="nombreSpan"></span>
+            </p>
+
+        </div>
+
+        <button id="obtenerClienteButton">Obtener Cliente</button>
+    </body>
+</html>
